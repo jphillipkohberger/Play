@@ -89,7 +89,21 @@ class Result
          * 
          */
 
+        // XOR with 2 inputs
+        //int a = 5;  // Binary: 0101
+        //int b = 3;  // Binary: 0011
+        //int result = a ^ b; // Binary: 0110 (decimal 6)  
 
+        // chain XOR with ultiple inputs
+        //int a = 5;  // Binary: 0101
+        //int b = 3;  // Binary: 0011
+        //int c = 6;  // Binary: 0110
+
+        // Chaining bitwise XOR operations
+        // int result = a ^ b ^ c;
+        // (0101 ^ 0011) = 0110 (6)
+        // (0110 ^ 0110) = 0000 (0)
+        //int result = 0000 = 0
 
         int n = 3;
         List<List<int>> queries = [[1,2,3]];
