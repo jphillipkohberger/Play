@@ -3,14 +3,24 @@
 
 class Result
 {
-    public static int hourglassSum(List<List<int>> a)
+    /**
+     * returns the Maximum Hour Glass Sum
+     */
+    public static int maximumHourglassSum(List<List<int>> a)
     {
-        int i, j, sumTop = 0, sumMiddle = 0, sumBottom = 0, sumTotal = 0;
+        // declare variables
+        int i, j;
+
+        // create new list
         List<int> hourGlassSums = new();
+
+        // iterate throw rows
         for (i = 0; i < a.Count(); i++)
         {
             // 4 is max number of rows
             if (i == 4) break;
+
+            // iterate through columns
             for (j = 0; j < a.Count(); j++)
             {
                 // 4 is max number of columns
@@ -49,7 +59,7 @@ class Result
         ];
 
         // calc
-        int n = Result.hourglassSum(arr);
+        int n = Result.maximumHourglassSum(arr);
 
         //print
         Console.WriteLine("Maximum of Hour Glass Sums " + n);
