@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 class Result
@@ -45,10 +46,54 @@ class Result
 
     public static List<int> DynamicArray(int n, List<List<int>> queries)
     {
+        int i, j, lastAnswer, idx;
+
+        lastAnswer = 0;
+
         // create a 2 dimensional array 
         // with n empty arrays
         // all zero-indexed
-        return null;
+        List<List<int>> arr = [];
+        for(i = 0; i < n; i++)
+        {
+            arr.Add(new List<int>());
+        }
+
+        // Declare a 2 - dimensional array, arr , with n empty arrays, all zero-indexed.
+        // Declare an integer, lastAnswer , and initialize it to 0.
+
+        //1. Query 1 x y
+        //    Compute idx = x ^ lastAnswer
+        //    Append the integer y to arr[idx]
+
+        //2. Query 2 x y
+        //    Compute idx = x ^ lastAnswer
+        //    Set lastAnswer = arr[idx][y % size(arr[idx])]
+        //    Store the new value of lastAnswer in an answers array
+
+        //Here’s the key point:
+        //The first number in each query(1 or 2) tells you what kind of operation to do.
+        //The second number(x) is only used to calculate the index into arr.
+        //Only the third number(y) in a Type 1 query is actually appended.
+
+
+        List<int> answers = new();
+        for (i = 0; i < queries.Count(); i++)
+        {
+            idx = (queries[i][1] ^ lastAnswer) % n;
+
+            if(queries[i][0] == 1) arr[idx].Add(queries[i][2]);
+
+            if (queries[i][0] == 2)
+            {
+                lastAnswer = arr[idx][queries[i][2] % arr[idx].Count()];
+                answers.Add(lastAnswer);
+            }
+            
+            Console.WriteLine("\n");
+        }
+
+        return answers;
     }
 
     public static int Main(string[] args)
@@ -77,7 +122,7 @@ class Result
         ];
 
         //print
-        Console.WriteLine("Maximum of Hour Glass Sums " + Result.maximumHourglassSum(a));
+        Console.WriteLine("Maximum of Hour Glass Sums " + Result.maximumHourglassSum(a) + "\n");
 
 
 
@@ -106,9 +151,11 @@ class Result
         //int result = 0000 = 0
 
         int n = 3;
-        List<List<int>> queries = [[1,2,3]];
+        List<List<int>> queries = [[1, 0, 5], [1, 1, 7], [1, 0, 3], [2, 1, 0], [2, 1, 1]];
 
-        Result.DynamicArray(n, queries);
+        List<int> answers = Result.DynamicArray(n, queries);
+
+        for (int x = 0; x < answers.Count(); x++) Console.WriteLine(answers[x]);
 
         return 0;
     }
