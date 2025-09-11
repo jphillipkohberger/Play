@@ -43,13 +43,31 @@ class Result
         return hourGlassSums.Max();
     }
 
+    public static List<int> DynamicArray(int n, List<List<int>> queries)
+    {
+        // create a 2 dimensional array 
+        // with n empty arrays
+        // all zero-indexed
+        return null;
+    }
+
     public static int Main(string[] args)
     {
+        /**
+         * 
+         * 
+         * HOUR GLASS SUM
+         * 
+         * 
+         */
+
+
+
         // new 2 dimensional array
-        List<List<int>> arr = new List<List<int>>();
+        List<List<int>> a = new List<List<int>>();
 
         // input
-        arr = [
+        a = [
             [1,2,3,4,5,6],
             [7,8,9,10,11,12],
             [14,15,16,17,18,19],
@@ -58,11 +76,25 @@ class Result
             [33,34,35,36,37,38]
         ];
 
-        // calc
-        int n = Result.maximumHourglassSum(arr);
-
         //print
-        Console.WriteLine("Maximum of Hour Glass Sums " + n);
+        Console.WriteLine("Maximum of Hour Glass Sums " + Result.maximumHourglassSum(a));
+
+
+
+        /**
+         * 
+         * 
+         * HOUR GLASS SUM
+         * 
+         * 
+         */
+
+
+
+        int n = 3;
+        List<List<int>> queries = [[1,2,3]];
+
+        Result.DynamicArray(n, queries);
 
         return 0;
     }
