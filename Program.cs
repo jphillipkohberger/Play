@@ -1,16 +1,5 @@
-﻿using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
-using System.Text;
-using System;
+﻿using System;
+
 
 class Result
 {
@@ -20,22 +9,24 @@ class Result
         List<int> hourGlassSums = new();
         for (i = 0; i < a.Count(); i++)
         {
+            // 4 is max number of rows
             if (i == 4) break;
-
             for (j = 0; j < a.Count(); j++)
             {
+                // 4 is max number of columns
                 if (j == 4) break;
-                Console.WriteLine(a[i][j].ToString() + " " + a[i][j + 1].ToString() + " " + a[i][j + 2].ToString());
-                Console.WriteLine("  " + a[i + 1][j + 1].ToString() + "  ");
-                Console.WriteLine(a[i + 2][j].ToString() + " " + a[i + 2][j + 1].ToString() + " " + a[i + 2][j + 2].ToString());
-                Console.WriteLine("------------------------");
 
-                sumTop = a[i][j] + a[i][j + 1] + a[i][j + 2];
-                sumMiddle = a[i + 1][j + 1];
-                sumBottom = a[i + 2][j] + a[i + 2][j + 1] + a[i + 2][j + 2];
-                sumTotal = sumTop + sumMiddle + sumBottom;
-                Console.WriteLine(sumTotal);
-                hourGlassSums.Add(sumTotal);
+                // calculation of sum added to list
+                hourGlassSums.Add(
+
+                       // in Hour Glass format
+                       a[i][j]   +   a[i][j + 1]    +  a[i][j + 2]
+
+                                + a[i + 1][j + 1]
+
+                    + a[i + 2][j] + a[i + 2][j + 1] + a[i + 2][j + 2]
+
+                );
             }
         }
 
@@ -44,8 +35,10 @@ class Result
 
     public static int Main(string[] args)
     {
+        // new 2 dimensional array
         List<List<int>> arr = new List<List<int>>();
 
+        // input
         arr = [
             [1,2,3,4,5,6],
             [7,8,9,10,11,12],
@@ -55,8 +48,11 @@ class Result
             [33,34,35,36,37,38]
         ];
 
+        // calc
         int n = Result.hourglassSum(arr);
-        Console.WriteLine(n);
+
+        //print
+        Console.WriteLine("Maximum of Hour Glass Sums " + n);
 
         return 0;
     }
