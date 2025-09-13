@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Runtime.InteropServices;
+
 
 
 class Result
@@ -102,25 +107,67 @@ class Result
         long max = 0;
 
         // initialized 0 indexed span
-        Span<long> a = new long[n];
+        List<long> a = new(new long[n]);
 
         // for loop control variables
         int i = 0, j = 0, start = 0, end = 0;
 
-        // iterate through all queries
-        for (i = 0; i < queries.Count(); i++)
+        unsafe
         {
-            // set dynamic start and end for inner loop
-            start = queries[i][0] - 1;
-            end = queries[i][1] - 1;
+            fixed (byte* managedMemory = new byte[(n - 1) * sizeof(long)]) {
 
-            // add queries[i][2] to a[i]
-            for (j = start; j <= end; j++)
-            {
-                a[j] += queries[i][2];
-                if (a[j] > max) max = a[j];
+                byte* ptrToElement = null;
+                string writerOut = "";
+                for (j = 0; j <= (n - 1) * sizeof(long); j += sizeof(long))
+                {
+                    ptrToElement = (managedMemory + j);
+
+                    writerOut += *(long*)ptrToElement + " ,";
+
+                }
+                
+                Console.WriteLine(writerOut);
+
+                // iterate through all queries
+                for (i = 0; i < queries.Count(); i++)
+                {
+                    // set dynamic start and end for inner loop
+                    start = (queries[i][0] - 1) * sizeof(long);
+                    end = (queries[i][1] - 1) * sizeof(long);
+
+                    // for loop start to end
+                    string writerIn = "";
+                    for (j = queries[i][0] - 1; j <= queries[i][1] - 1; j += 1)
+                    {
+                        a[j] += queries[i][2];
+                        writerIn += a[j] + ", ";
+                    }
+
+                    for (j = start; j <= end; j += sizeof(long))
+                    {
+                        ptrToElement = (managedMemory + j);
+
+                        *(long*)ptrToElement += (long)queries[i][2];
+
+                        if (*(long*)ptrToElement > max) max = *(long*)ptrToElement;
+                    }
+                }
+                Console.WriteLine(string.Join(" ,", a));
+
+                string writer = "";
+                for (j = 0; j <= (n - 1) * sizeof(long); j += sizeof(long))
+                {
+                    ptrToElement = (managedMemory + j);
+
+                    writer += *(long*)ptrToElement + " ,";
+
+                }
+                Console.WriteLine(writer);
+
+                Marshal.FreeHGlobal((nint)managedMemory);
+                Marshal.FreeHGlobal((nint)ptrToElement);
+
             }
-            
         }
 
         return max;
@@ -183,9 +230,9 @@ class Result
         int n = 3;
         List<List<int>> queries = [[1, 0, 5], [1, 1, 7], [1, 0, 3], [2, 1, 0], [2, 1, 1]];
 
-        List<int> answers = Result.DynamicArray(n, queries);
+        //List<int> answers = Result.DynamicArray(n, queries);
 
-        for (int x = 0; x < answers.Count(); x++) Console.WriteLine(answers[x]);
+        //for (int x = 0; x < answers.Count(); x++) Console.WriteLine(answers[x]);
 
         n = 10;
         queries = [[1, 5, 3], [4, 8, 7], [6, 9, 1]];
