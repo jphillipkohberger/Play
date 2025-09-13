@@ -101,8 +101,8 @@ class Result
         // return max long
         long max = 0;
 
-        // initialized 0 indexed array
-        long [] a = new long [n];
+        // initialized 0 indexed span
+        Span<long> a = new long[n];
 
         // for loop control variables
         int i = 0, j = 0, start = 0, end = 0;
@@ -115,14 +115,14 @@ class Result
             end = queries[i][1] - 1;
 
             // add queries[i][2] to a[i]
-            for (j = start; j <= end; j++) a[j] += queries[i][2];
-
-            // write result
-            Console.WriteLine(string.Join(", ",a));
+            for (j = start; j <= end; j++)
+            {
+                a[j] += queries[i][2];
+                if (a[j] > max) max = a[j];
+            }
+            
         }
 
-        //set max var and return
-        max = a.Max();
         return max;
     }
 
@@ -190,6 +190,8 @@ class Result
         n = 10;
         queries = [[1, 5, 3], [4, 8, 7], [6, 9, 1]];
         long max = Result.ArrayManipulation(n, queries);
+
+        Console.WriteLine(max);
 
         return 0;
     }
