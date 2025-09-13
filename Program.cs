@@ -96,6 +96,36 @@ class Result
         return answers;
     }
 
+    public static long ArrayManipulation(int n, List<List<int>> queries)
+    {
+        // return max long
+        long max = 0;
+
+        // initialized 0 indexed array
+        long [] a = new long [n];
+
+        // for loop control variables
+        int i = 0, j = 0, start = 0, end = 0;
+
+        // iterate through all queries
+        for (i = 0; i < queries.Count(); i++)
+        {
+            // set dynamic start and end for inner loop
+            start = queries[i][0] - 1;
+            end = queries[i][1] - 1;
+
+            // add queries[i][2] to a[i]
+            for (j = start; j <= end; j++) a[j] += queries[i][2];
+
+            // write result
+            Console.WriteLine(string.Join(", ",a));
+        }
+
+        //set max var and return
+        max = a.Max();
+        return max;
+    }
+
     public static int Main(string[] args)
     {
         /**
@@ -156,6 +186,10 @@ class Result
         List<int> answers = Result.DynamicArray(n, queries);
 
         for (int x = 0; x < answers.Count(); x++) Console.WriteLine(answers[x]);
+
+        n = 10;
+        queries = [[1, 5, 3], [4, 8, 7], [6, 9, 1]];
+        long max = Result.ArrayManipulation(n, queries);
 
         return 0;
     }
