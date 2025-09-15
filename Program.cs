@@ -357,6 +357,85 @@ class Result
         }
     }
 
+    public static long AVeryBigSum(List<long> ar)
+    {
+        return (long)ar.Sum();
+    }
+
+    public static int DiagonalDifference(List<List<int>> arr)
+    {
+        arr = [
+            [11, 2,  4],
+            [4,  5,  6],
+            [10, 8, -12]
+        ];
+
+        int absSumLeftToRight = 0, absSumRightToLeft = 0, leftToRight = 0, rightToLeft = arr.Count() - 1, 
+            thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0, i = 0, j = 0;
+
+        for(i = 0; i < arr.Count(); i++)
+        {
+            thisRow = i;
+            for (j = 0; j < arr[i].Count(); j++)
+            {
+                thisColumn = j;
+                if(thisColumn == 0 && thisRow == 0)
+                {
+                    absSumLeftToRight += (arr[i][j]);
+                    lastColumn = j;
+                    break;
+                }
+
+                if (thisColumn == arr[i].Count() - 1 && i == arr.Count() - 1)
+                {
+                    absSumLeftToRight += (arr[i][j]);
+                    lastColumn = j;
+                    break;
+                }
+
+                if (thisColumn == lastColumn + 1)
+                {
+                    absSumLeftToRight += (arr[i][j]);
+                    lastColumn = j;
+                    break;
+                }
+            }
+            
+        }
+
+        for (i = 0; i < arr.Count(); i++)
+        {
+            thisRow = i;
+            for (j = arr[i].Count() - 1; j >= 0; --j)
+            {
+                thisColumn = j;
+                if (thisColumn == arr[i].Count() - 1 && thisRow == 0)
+                {
+                    absSumRightToLeft += (arr[i][j]);
+                    lastColumn = j;
+                    break;
+                }
+
+                if (thisColumn == 0 && thisRow == arr.Count() - 1)
+                {
+                    absSumRightToLeft += (arr[i][j]);
+                    lastColumn = j;
+                    break;
+                }
+
+                if (thisColumn == lastColumn - 1)
+                {
+                    absSumRightToLeft += (arr[i][j]);
+                    lastColumn = j;
+                    break;
+                }
+            }
+
+        }
+
+        return Math.Abs(absSumLeftToRight - absSumRightToLeft);
+    }
+
     public static long ArrayManipulation(int n, List<List<int>> queries)
     {
         // return max long
@@ -470,6 +549,15 @@ class Result
 
         numberList = [-4, 3, -9, 0, 4, 1];
         Result.PlusMinus(numberList);
+
+        List<List<int>> arr = [
+            [11, 2,  4], 
+            [4,  5,  6], 
+            [10, 8, -12]
+        ];
+
+        Result.DiagonalDifference(arr);
+
 
         return 0;
     }
