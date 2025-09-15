@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 
 
@@ -101,7 +103,7 @@ class Result
         return answers;
     }
 
-    public static long ArrayManipulation(int n, List<List<int>> queries)
+    public static long ArrayManipulationParallel(int n, List<List<int>> queries)
     {
         // return max long
         long max = 0;
@@ -184,7 +186,8 @@ class Result
     public static void PlusMinus(List<int> arr)
     {
         int count = arr.Count(), next = 0, counter = 0, i = 0, current = 0;
-        List<double> ratios = new();
+        List<KeyValuePair<string,double>> ratios = new();
+        double ratio;
         arr.Sort();
 
         for (i = 0; i < count; i++)
@@ -207,7 +210,8 @@ class Result
                 if (i == (count - 1))
                 {
                     counter++;
-                    ratios.Add(((double)counter / (double)count));
+                    ratio = (double)((double)counter / (double)count);
+                    ratios.Add(new KeyValuePair<string,double>("Negative", ratio));
                     counter = 0;
                     break;
                 }
@@ -219,7 +223,8 @@ class Result
                 if (next == 0 || next > 0)
                 {
                     counter++;
-                    ratios.Add(((double)counter / (double)count));
+                    ratio = (double)((double)counter / (double)count);
+                    ratios.Add(new KeyValuePair<string, double>("Negative", ratio));
                     counter = 0;
                     continue;
                 }
@@ -244,7 +249,8 @@ class Result
                 if (i == (count - 1))
                 {
                     counter++;
-                    ratios.Add(((double)counter / (double)count));
+                    ratio = (double)((double)counter / (double)count);
+                    ratios.Add(new KeyValuePair<string, double>("Zero", ratio));
                     counter = 0;
                     break;
                 }
@@ -256,7 +262,8 @@ class Result
                 if (next > 0)
                 {
                     counter++;
-                    ratios.Add(((double)counter / (double)count));
+                    ratio = (double)((double)counter / (double)count);
+                    ratios.Add(new KeyValuePair<string, double>("Zero", ratio));
                     counter = 0;
                     continue;
                 }
@@ -280,7 +287,8 @@ class Result
                 if (i == (count - 1))
                 {
                     counter++;
-                    ratios.Add(((double)counter / (double)count));
+                    ratio = (double)((double)counter / (double)count);
+                    ratios.Add(new KeyValuePair<string, double>("Positive", ratio));
                     counter = 0;
                     break;
                 }
@@ -297,13 +305,82 @@ class Result
             
         }
 
-        ratios.Sort();
-        ratios.Reverse();
+        //ratios.Sort();
+        //ratios.Reverse(); 
+
+        if(ratios.Count() == 1)
+        {
+            if (ratios[0].Key == "Negative")
+            {
+                ratios.Add(new KeyValuePair<string, double>("Zero", 0));
+                ratios.Add(new KeyValuePair<string, double>("Positive", 0));
+            }
+            if (ratios[0].Key == "Zero")
+            {
+                ratios.Add(new KeyValuePair<string, double>("Negative", 0));
+                ratios.Add(new KeyValuePair<string, double>("Positive", 0));
+            }
+            if (ratios[0].Key == "Positive")
+            {
+                ratios.Add(new KeyValuePair<string, double>("Zero", 0));
+                ratios.Add(new KeyValuePair<string, double>("Negative", 0));
+            }
+        }
+
+        if (ratios.Count() == 2)
+        {
+            bool found = false;
+            List<string> labels = ["Negative", "Zero", "Positive"];
+            for (int j = 0; j < labels.Count(); j++)
+            {
+                found = false;
+                for (i = 0; i < ratios.Count(); i++)
+                {
+                    if (labels[j] == ratios[i].Key)
+                    {
+                        found = true; break;
+                    }
+                }
+                if (found == false)
+                {
+                    ratios.Add(new KeyValuePair<string,double>(labels[j], 0));
+                }
+
+            }
+        }
+
+        List<KeyValuePair<string, double>> sortedByValue = ratios.OrderByDescending(pair => pair.Value).ToList();
 
         for (i = 0; i < ratios.Count(); i++)
         {
-            Console.WriteLine(ratios[i]);
+            Console.WriteLine(string.Format(sortedByValue[i].Value.ToString("0.000000"), "F6"));
         }
+    }
+
+    public static long ArrayManipulation(int n, List<List<int>> queries)
+    {
+        // return max long
+        long max = 0;
+        long[] a;
+
+        // initialized 0 indexed array
+        a = new long[n];
+
+        // for loop control variables
+        int i = 0, j = 0, start = 0, end = 0;
+
+        var quizzyMax = queries.AsParallel().Select((List<int> query, int i) =>
+        {
+            start = queries[i][0] - 1;
+            end = queries[i][1] - 1;
+
+            // add queries[i][2] to a[i]
+            for (j = (queries[i][0] - 1); j <= (queries[i][1] - 1); j++) a[j] += queries[i][2];
+
+            return query;
+        }).ToList();
+
+        return a.Max();
     }
 
     public static int Main(string[] args)
@@ -383,12 +460,15 @@ class Result
         //Result.PrintLinkedList(llist.head);
 
 
-        string spacedNumbers = "55 48 48 45 91 97 45 1 39 54 36 6 19 35 66 36 72 93 38 21 65 70 36 63 39 76 82 26 67 29 24 82 62 53 1 50 47 65 67 19 66 90 77";
+        //string spacedNumbers = "55 48 48 45 91 97 45 1 39 54 36 6 19 35 66 36 72 93 38 21 65 70 36 63 39 76 82 26 67 29 24 82 62 53 1 50 47 65 67 19 66 90 77";
+
+        string spacedNumbers = "0 100 35 0 94 40 42 87 59 0";
 
         List<int> numberList = spacedNumbers.Split(' ') // Split by space
-                                           .Select(s => int.Parse(s)) // Parse each substring to an int
-                                           .ToList();
-        //[-4, 3, -9, 0, 4, 1] 
+            .Select(s => int.Parse(s)) // Parse each substring to an int
+            .ToList();
+
+        numberList = [-4, 3, -9, 0, 4, 1];
         Result.PlusMinus(numberList);
 
         return 0;
