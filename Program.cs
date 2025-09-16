@@ -495,6 +495,7 @@ class Result
             for (j = 0; j < arr[i].Count(); j++)
             {
                 thisColumn = j;
+                // first row, first column
                 if (thisColumn == 0 && thisRow == 0)
                 {
                     writer += " X ";
@@ -503,6 +504,7 @@ class Result
                     written = true;
                 }
 
+                // last row, last column
                 if (thisColumn == arr[i].Count() - 1 && thisRow == arr.Count() - 1)
                 {
                     writer += " X ";
@@ -511,6 +513,7 @@ class Result
                     written = true;
                 }
 
+                //  one column to the right from last position, one row to the bottom from the last position
                 if (thisColumn == lastColumn + 1 && thisRow == lastRow + 1)
                 {
                     writer += " X ";
@@ -519,7 +522,8 @@ class Result
                     written = true;
                 }
 
-                if (written == false && i < arr[i].Count())
+                // if nothing has been written and the current iteration is less than current row column count
+                if (written == false && j < arr[i].Count())
                 {
                     writer += " - ";
                     written = true;
@@ -533,34 +537,6 @@ class Result
 
         }
 
-        //for (i = 0; i < arr.Count(); i++)
-        //{
-        //    thisRow = i;
-        //    for (j = arr[i].Count() - 1; j >= 0; --j)
-        //    {
-        //        thisColumn = j;
-        //        if (thisColumn == arr[i].Count() - 1 && thisRow == 0)
-        //        {
-        //            absSumRightToLeft += (arr[i][j]);
-        //            lastColumn = j;
-        //            break;
-        //        }
-
-        //        if (thisColumn == 0 && thisRow == arr.Count() - 1)
-        //        {
-        //            absSumRightToLeft += (arr[i][j]);
-        //            lastColumn = j;
-        //            break;
-        //        }
-
-        //        if (thisColumn == lastColumn - 1)
-        //        {
-        //            absSumRightToLeft += (arr[i][j]);
-        //            lastColumn = j;
-        //            break;
-        //        }
-        //    }
-        //}
 
         for (i = 0; i < arr.Count(); i++)
         {
@@ -568,15 +544,16 @@ class Result
             for (j = arr[i].Count() - 1; j >= 0; --j)
             {
                 thisColumn = j;
+                // last column, first row
                 if (thisColumn == arr[i].Count() - 1 && thisRow == 0)
                 {
-                    writer = " -  -  -  -  -  X ";
+                    writer = " X ";
                     lastColumn = j;
                     lastRow = i;
-                    written = false;
-                    break;
+                    written = true;
                 }
 
+                // last row, first column
                 if (thisRow == arr.Count() - 1 && thisColumn == 0)
                 {
                     writer = " X " + writer;
@@ -585,6 +562,7 @@ class Result
                     written = true;
                 }
 
+                //  one column to the left from last position, one row to the bottom from the last position
                 if (thisColumn == lastColumn - 1 && thisRow == lastRow + 1)
                 {
                     writer = " X " + writer;
@@ -593,7 +571,8 @@ class Result
                     written = true;
                 }
 
-                if (written == false && i > 0)
+                // if nothing has been written and the current iteration is greater than current row column count
+                if (written == false && j >= 0)
                 {
                     writer = " - " + writer;
                     written = true;
