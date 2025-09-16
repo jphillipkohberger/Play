@@ -519,6 +519,7 @@ class Result
                     writer += " X ";
                     lastRow = i;
                     lastColumn = j;
+                    written = true;
                     //break;
                 }
 
