@@ -602,6 +602,85 @@ class Result
         }
     }
 
+    public static void MiniMaxSum(List<int> arr)
+    {
+        int i = 0, j = 0;
+        long sum = 0, min = 0, max = 0;
+
+        List<long> sums = new();
+
+        for (i = 0; i < arr.Count(); i++)
+        {
+            sum = 0;
+            for (j = 0; j < arr.Count(); j++)
+            {
+                if(arr[i] == arr[j] && i == j)
+                {
+                    continue;
+                }
+                sum += arr[j];
+            }
+            sums.Add(sum);
+        }
+
+        min = (long)sums.Min();
+        max = (long)sums.Max();
+
+        Console.WriteLine(min.ToString() + " " + max.ToString());
+
+        string writer = "";
+    }
+
+    public static int BirthdayCakeCandles(List<int> candles)
+    {
+        int i = 0, count = 0, last = 0;
+
+        candles = candles.OrderByDescending(n => n).ToList();
+
+        for (i = 0; i < candles.Count(); i++)
+        {
+            if(i != 0 && last != candles[i])
+            {
+                break;
+            }
+
+            count++;
+
+            last = candles[i];
+        }
+
+        return count;
+    }
+
+    public static string TimeConversion(string s)
+    {
+        return DateTime.ParseExact(s, "hh:mm:sstt", System.Globalization.CultureInfo.InvariantCulture).ToString("HH:mm:ss");
+    }
+
+    public static List<int> GradingStudents(List<int> grades)
+    {
+        int i = 0, nextMultipleOfFifty = 0;
+
+        for(i = 0; i < grades.Count; i++)
+        {
+            if(grades[i] < 38)
+            {
+                continue;
+            }
+
+            if (((grades[i] + 2) % 5 == 0))
+            {
+                grades[i] += 2;
+            }
+
+            if (((grades[i] + 1) % 5 == 0))
+            {
+                grades[i] += 1;
+            }
+        }
+
+        return grades;
+    }
 
     public static int Main(string[] args)
     {
@@ -701,6 +780,11 @@ class Result
 
         Result.Staircase(6);
 
+        Result.MiniMaxSum([1, 2, 3, 4, 5]);
+
+        Result.BirthdayCakeCandles([3, 2, 1, 4 ,3, 5 , 5 , 5]);
+
+        Result.GradingStudents([73, 67, 38, 33]);
 
         return 0;
     }
