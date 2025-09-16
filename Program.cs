@@ -573,7 +573,7 @@ class Result
                     writer = " -  -  -  -  -  X ";
                     lastColumn = j;
                     lastRow = i;
-                    written = true;
+                    written = false;
                     break;
                 }
 
