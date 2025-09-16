@@ -364,12 +364,6 @@ class Result
 
     public static int DiagonalDifference(List<List<int>> arr)
     {
-        arr = [
-            [11, 2,  4],
-            [4,  5,  6],
-            [10, 8, -12]
-        ];
-
         int absSumLeftToRight = 0, absSumRightToLeft = 0, leftToRight = 0, rightToLeft = arr.Count() - 1, 
             thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0, i = 0, j = 0;
 
@@ -461,6 +455,120 @@ class Result
 
         return a.Max();
     }
+
+    public static void Staircase(int n)
+    {
+        int absSumLeftToRight = 0, absSumRightToLeft = 0, leftToRight = 0, rightToLeft = n - 1,
+            thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0, i = 0, j = 0;
+
+        string writer = "";
+
+        bool written = false;
+
+        List<List<string>> arr = new();
+
+        for(i = 0; i < n; i++)
+        {
+            arr.Add(new List<string>());
+            for(j = 0; j < n; j++)
+            {
+                arr[i].Add("#");
+            }
+        }
+
+        for (i = 0; i < n; i++)
+        {
+            for (j = 0; j < n; j++)
+            {
+                writer += arr[i][j] + " ";
+            }
+            Console.WriteLine(writer);
+            writer = "";
+        }
+
+        Console.WriteLine("");
+
+        Console.WriteLine("");
+
+        for (i = 0; i < arr.Count(); i++)
+        {
+            thisRow = i;
+            for (j = 0; j < arr[i].Count(); j++)
+            {
+                thisColumn = j;
+                if (thisColumn == 0 && thisRow == 0)
+                {
+                    writer += " X ";
+                    lastColumn = j;
+                    lastRow = i;
+                    written = true;
+                    //break;
+                }
+
+                if (thisColumn == arr[i].Count() - 1 && thisRow == arr.Count() - 1)
+                {
+                    writer += " X ";
+                    lastColumn = j;
+                    lastRow = i;
+                    written = true;
+                    //break;
+                }
+
+                if (thisColumn == lastColumn + 1 && thisRow == lastRow + 1)
+                {
+                    writer += " X ";
+                    lastRow = i;
+                    lastColumn = j;
+                    //break;
+                }
+
+                if (written == false && i < arr[i].Count())
+                {
+                    writer += " - ";
+                    written = true;
+                }
+
+                written = false;
+
+            }
+            Console.WriteLine(writer);
+            writer = "";
+
+        }
+
+        //for (i = 0; i < arr.Count(); i++)
+        //{
+        //    thisRow = i;
+        //    for (j = arr[i].Count() - 1; j >= 0; --j)
+        //    {
+        //        thisColumn = j;
+        //        if (thisColumn == arr[i].Count() - 1 && thisRow == 0)
+        //        {
+        //            absSumRightToLeft += (arr[i][j]);
+        //            lastColumn = j;
+        //            break;
+        //        }
+
+        //        if (thisColumn == 0 && thisRow == arr.Count() - 1)
+        //        {
+        //            absSumRightToLeft += (arr[i][j]);
+        //            lastColumn = j;
+        //            break;
+        //        }
+
+        //        if (thisColumn == lastColumn - 1)
+        //        {
+        //            absSumRightToLeft += (arr[i][j]);
+        //            lastColumn = j;
+        //            break;
+        //        }
+        //    }
+
+        //}
+
+        //return Math.Abs(absSumLeftToRight - absSumRightToLeft);
+    }
+
 
     public static int Main(string[] args)
     {
@@ -556,7 +664,9 @@ class Result
             [10, 8, -12]
         ];
 
-        Result.DiagonalDifference(arr);
+        int diagonalDifferenceAbsoluteSum = Result.DiagonalDifference(arr);
+
+        Result.Staircase(6);
 
 
         return 0;
