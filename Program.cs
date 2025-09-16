@@ -498,7 +498,7 @@ class Result
                 // first row, first column
                 if (thisColumn == 0 && thisRow == 0)
                 {
-                    writer += " X ";
+                    writer += "#";
                     lastColumn = j;
                     lastRow = i;
                     written = true;
@@ -507,25 +507,32 @@ class Result
                 // last row, last column
                 if (thisColumn == arr[i].Count() - 1 && thisRow == arr.Count() - 1)
                 {
-                    writer += " X ";
+                    writer += "#";
                     lastColumn = j;
                     lastRow = i;
                     written = true;
                 }
 
                 //  one column to the right from last position, one row to the bottom from the last position
-                if (thisColumn == lastColumn + 1 && thisRow == lastRow + 1)
+                if (written == false && thisColumn == lastColumn + 1 && thisRow == lastRow + 1)
                 {
-                    writer += " X ";
+                    writer += "#";
                     lastRow = i;
                     lastColumn = j;
+                    written = true;
+                }
+
+                // thisColumn is greater than the diagonal cutoff
+                if (written == false && thisColumn <= lastColumn + 1 && thisRow == lastRow + 1)
+                {
+                    writer = "#" + writer;
                     written = true;
                 }
 
                 // if nothing has been written and the current iteration is less than current row column count
                 if (written == false && j < arr[i].Count())
                 {
-                    writer += " - ";
+                    writer += " ";
                     written = true;
                 }
 
@@ -547,7 +554,7 @@ class Result
                 // last column, first row
                 if (thisColumn == arr[i].Count() - 1 && thisRow == 0)
                 {
-                    writer = " X ";
+                    writer = "#";
                     lastColumn = j;
                     lastRow = i;
                     written = true;
@@ -556,25 +563,33 @@ class Result
                 // last row, first column
                 if (thisRow == arr.Count() - 1 && thisColumn == 0)
                 {
-                    writer = " X " + writer;
+                    writer = "#" + writer;
                     lastColumn = j;
                     lastRow = i;
                     written = true;
+                    writer = writer.Trim();
                 }
 
                 //  one column to the left from last position, one row to the bottom from the last position
-                if (thisColumn == lastColumn - 1 && thisRow == lastRow + 1)
+                if (written == false && thisColumn == lastColumn - 1 && thisRow == lastRow + 1)
                 {
-                    writer = " X " + writer;
+                    writer = "#" + writer;
                     lastRow = i;
                     lastColumn = j;
+                    written = true;
+                }
+
+                // thisColumn is less than the diagonal cutoff
+                if (written == false && thisColumn >= lastColumn - 1 && thisRow == lastRow + 1)
+                {
+                    writer = "#" + writer;
                     written = true;
                 }
 
                 // if nothing has been written and the current iteration is greater than current row column count
                 if (written == false && j >= 0)
                 {
-                    writer = " - " + writer;
+                    writer = " " + writer;
                     written = true;
                 }
 
