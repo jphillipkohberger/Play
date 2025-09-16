@@ -424,7 +424,6 @@ class Result
                     break;
                 }
             }
-
         }
 
         return Math.Abs(absSumLeftToRight - absSumRightToLeft);
@@ -502,7 +501,6 @@ class Result
                     lastColumn = j;
                     lastRow = i;
                     written = true;
-                    //break;
                 }
 
                 if (thisColumn == arr[i].Count() - 1 && thisRow == arr.Count() - 1)
@@ -511,7 +509,6 @@ class Result
                     lastColumn = j;
                     lastRow = i;
                     written = true;
-                    //break;
                 }
 
                 if (thisColumn == lastColumn + 1 && thisRow == lastRow + 1)
@@ -520,7 +517,6 @@ class Result
                     lastRow = i;
                     lastColumn = j;
                     written = true;
-                    //break;
                 }
 
                 if (written == false && i < arr[i].Count())
@@ -564,10 +560,52 @@ class Result
         //            break;
         //        }
         //    }
-
         //}
 
-        //return Math.Abs(absSumLeftToRight - absSumRightToLeft);
+        for (i = 0; i < arr.Count(); i++)
+        {
+            thisRow = i;
+            for (j = arr[i].Count() - 1; j >= 0; --j)
+            {
+                thisColumn = j;
+                if (thisColumn == arr[i].Count() - 1 && thisRow == 0)
+                {
+                    writer = " -  -  -  -  -  X ";
+                    lastColumn = j;
+                    lastRow = i;
+                    written = true;
+                    break;
+                }
+
+                if (thisRow == arr.Count() - 1 && thisColumn == 0)
+                {
+                    writer = " X " + writer;
+                    lastColumn = j;
+                    lastRow = i;
+                    written = true;
+                }
+
+                if (thisColumn == lastColumn - 1 && thisRow == lastRow + 1)
+                {
+                    writer = " X " + writer;
+                    lastRow = i;
+                    lastColumn = j;
+                    written = true;
+                }
+
+                if (written == false && i > 0)
+                {
+                    writer = " - " + writer;
+                    written = true;
+                }
+
+                written = false;
+
+            }
+            Console.WriteLine(writer);
+            writer = "";
+
+        }
     }
 
 
