@@ -327,33 +327,32 @@ class Result
             }
         }
 
-        if (ratios.Count() == 2)
-        {
-            bool found = false;
-            List<string> labels = ["Negative", "Zero", "Positive"];
-            for (int j = 0; j < labels.Count(); j++)
-            {
-                found = false;
-                for (i = 0; i < ratios.Count(); i++)
-                {
-                    if (labels[j] == ratios[i].Key)
-                    {
-                        found = true; break;
-                    }
-                }
-                if (found == false)
-                {
-                    ratios.Add(new KeyValuePair<string,double>(labels[j], 0));
-                }
+    List<KeyValuePair<string, double>> ratiosForPrint = new List<KeyValuePair<string, double>>();
 
+
+        bool found = false;
+        List<string> labels = ["Positive", "Negative", "Zero"];
+        for (int j = 0; j < labels.Count(); j++)
+        {
+            found = false;
+            for (i = 0; i < ratios.Count(); i++)
+            {
+                if (labels[j] == ratios[i].Key)
+                {
+                    ratiosForPrint.Add(new KeyValuePair<string, double>(labels[j], ratios[i].Value));
+                    found = true; break;
+                }
             }
+            if (found == false)
+            {
+                ratiosForPrint.Add(new KeyValuePair<string,double>(labels[j], 0));
+            }
+
         }
 
-        List<KeyValuePair<string, double>> sortedByValue = ratios.OrderByDescending(pair => pair.Value).ToList();
-
-        for (i = 0; i < ratios.Count(); i++)
+        for (i = 0; i < ratiosForPrint.Count(); i++)
         {
-            Console.WriteLine(string.Format(sortedByValue[i].Value.ToString("0.000000"), "F6"));
+            Console.WriteLine(string.Format(ratiosForPrint[i].Value.ToString("0.000000"), "F6"));
         }
     }
 
@@ -682,6 +681,70 @@ class Result
         return grades;
     }
 
+    public static string GliderExam(int N, int M, int X)
+    {
+        // GOLD = 1, SILVER = 0
+        // X is position of GOLD in keys list
+        // M is number of tries for GOLD
+        // N is number of keys
+
+        // if position of GOLD is greater than size of keys return
+        if (X > N - 1) return "";
+
+        // initialize all elements to silver in keys list
+        List<int> keys = new List<int>(new int[N]);
+        // set position of gold in keys list
+        keys[X] = 1;
+
+        List<string> players = new List<string>(["HARRY", "STEVE"]);
+
+        int i = 0, j = 0, k =0, start = 0, end = 0;
+
+        bool found = false, playerTurnEvenOdd = true;
+
+        string playersTurn = "HARRY";
+
+        // continue loop perpetually until one player wins
+        while(found == false)
+        {
+            // alternate turns between STEVE and HARRY
+            if(k % 2 == 0 || k == 0)
+            {
+                playersTurn = players[0];
+            }
+            else
+            {
+                playersTurn = players[1];
+            }
+
+            start = i;
+            end = start + M;
+
+            // each turn consists of M consecutive tries
+            for (j = start; j <= end; j++)
+            {
+                if (j == X)
+                {
+                    return playersTurn;
+                }
+
+                if (j == M)
+                {
+                    break;
+                }
+            }
+
+            // odd increement that both had chance once
+            if(k % 2 != 0)
+            {
+                i++;
+            }
+            k++;
+        }
+
+        return "";
+    }
+
     public static int Main(string[] args)
     {
         /**
@@ -785,6 +848,8 @@ class Result
         Result.BirthdayCakeCandles([3, 2, 1, 4 ,3, 5 , 5 , 5]);
 
         Result.GradingStudents([73, 67, 38, 33]);
+
+        Result.GliderExam(20,5,15);
 
         return 0;
     }
