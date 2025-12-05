@@ -745,6 +745,36 @@ class Result
         return "";
     }
 
+    /*
+     * Write a function that takes an integer as input, and returns the 
+     * number of bits that are equal to one in the binary representation 
+     * of that number. You can guarantee that input is non-negative.
+     * Example: The binary representation of 1234 is 10011010010, 
+     * so the function should return 5 in this case
+    **/
+
+    public static int BitsEqualToOne(int number)
+    {
+        if (number <= 0) return 0;
+
+        int returnNumber = 0;
+        string numberBinaryAsString = Convert.ToString(number, 2);
+        char localNumberBinaryAsChar;
+        string localNumberBinaryAsString = "";
+        for (int i = 0; i < numberBinaryAsString.Length; i++)
+        {
+            localNumberBinaryAsChar = numberBinaryAsString[i];
+            localNumberBinaryAsString = localNumberBinaryAsChar.ToString();
+            if (localNumberBinaryAsString.Equals("1"))
+            {
+                returnNumber++;
+            }
+        }
+
+        Console.WriteLine("Number: " + number.ToString() + " Converted: " + numberBinaryAsString + " Number of Bits equal to 1: " + returnNumber.ToString());
+        return 0;
+    }
+
     public static int Main(string[] args)
     {
         /**
@@ -757,8 +787,8 @@ class Result
 
 
 
-        // new 2 dimensional array
-        List<List<int>> a = new List<List<int>>();
+    // new 2 dimensional array
+    List<List<int>> a = new List<List<int>>();
 
         // input
         a = [
@@ -771,7 +801,7 @@ class Result
         ];
 
         //print
-        Console.WriteLine("Maximum of Hour Glass Sums " + Result.maximumHourglassSum(a) + "\n");
+        Console.WriteLine("Maximum of Hour Glass Sums: " + Result.maximumHourglassSum(a) + "\n");
 
 
 
@@ -849,7 +879,11 @@ class Result
 
         Result.GradingStudents([73, 67, 38, 33]);
 
-        Result.GliderExam(20,5,15);
+        // Result.GliderExam(20,5,15);
+
+        int number = 7819;
+
+        Result.BitsEqualToOne(number);
 
         return 0;
     }
