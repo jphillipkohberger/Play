@@ -183,6 +183,26 @@ class Result
         }
     }
 
+    static void PrintLinkedListReverse(SinglyLinkedListNode head)
+    {
+        var current = head;
+        List<int> tempContainerLinkedList = new List<int>();
+        while (current != null)
+        {
+            tempContainerLinkedList.Add(current.data);
+            current = current.next;
+        }
+
+        int originalCount = tempContainerLinkedList.Count() - 1;
+
+        while (tempContainerLinkedList.Count() > 0)
+        {
+            int lastItem =  tempContainerLinkedList.Last();
+            tempContainerLinkedList.RemoveAt(originalCount--);
+            Console.WriteLine(lastItem.ToString());
+        }
+    }
+
     public static void PlusMinus(List<int> arr)
     {
         int count = arr.Count(), next = 0, counter = 0, i = 0, current = 0;
@@ -775,6 +795,9 @@ class Result
         return 0;
     }
 
+
+    
+
     public static int Main(string[] args)
     {
         /**
@@ -843,13 +866,14 @@ class Result
         Console.WriteLine("Max Bottom: " + max);
 
         SinglyLinkedList llist = new SinglyLinkedList();
-        llist.InsertNode(1);
-        llist.InsertNode(2);
-        llist.InsertNode(3);
-        llist.InsertNode(4);
-        llist.InsertNode(5);
+        llist.InsertNode(101);
+        llist.InsertNode(302);
+        llist.InsertNode(164);
+        llist.InsertNode(530);
+        llist.InsertNode(474);
 
-        //Result.PrintLinkedList(llist.head);
+        Result.PrintLinkedList(llist.head);
+        Result.PrintLinkedListReverse(llist.head);
 
 
         //string spacedNumbers = "55 48 48 45 91 97 45 1 39 54 36 6 19 35 66 36 72 93 38 21 65 70 36 63 39 76 82 26 67 29 24 82 62 53 1 50 47 65 67 19 66 90 77";
