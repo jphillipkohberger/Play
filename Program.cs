@@ -171,6 +171,16 @@ class Result
 
             this.tail = node;
         }
+
+        public void PrintLinkedList()
+        {
+            var current = this.head;
+            while (current != null)
+            {
+                Console.WriteLine("Built In Print: " + current.data);
+                current = current.next;
+            }
+        }
     }
 
     static void PrintLinkedList(SinglyLinkedListNode head)
@@ -197,7 +207,27 @@ class Result
 
         while (tempContainerLinkedList.Count() > 0)
         {
-            int lastItem =  tempContainerLinkedList.Last();
+            int lastItem = tempContainerLinkedList.Last();
+            tempContainerLinkedList.RemoveAt(originalCount--);
+            Console.WriteLine(lastItem.ToString());
+        }
+    }
+
+    static void LinkedListReverse(SinglyLinkedListNode head)
+    {
+        var current = head;
+        List<int> tempContainerLinkedList = new List<int>();
+        while (current != null)
+        {
+            tempContainerLinkedList.Add(current.data);
+            current = current.next;
+        }
+
+        int originalCount = tempContainerLinkedList.Count() - 1;
+
+        while (tempContainerLinkedList.Count() > 0)
+        {
+            int lastItem = tempContainerLinkedList.Last();
             tempContainerLinkedList.RemoveAt(originalCount--);
             Console.WriteLine(lastItem.ToString());
         }
@@ -872,8 +902,11 @@ class Result
         llist.InsertNode(530);
         llist.InsertNode(474);
 
+        llist.PrintLinkedList();
+
         Result.PrintLinkedList(llist.head);
         Result.PrintLinkedListReverse(llist.head);
+        Result.LinkedListReverse(llist.head);
 
 
         //string spacedNumbers = "55 48 48 45 91 97 45 1 39 54 36 6 19 35 66 36 72 93 38 21 65 70 36 63 39 76 82 26 67 29 24 82 62 53 1 50 47 65 67 19 66 90 77";
