@@ -825,8 +825,56 @@ class Result
         return 0;
     }
 
+    /*
+     * Complete the 'kangaroo' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts following parameters:
+     *  1. INTEGER x1
+     *  2. INTEGER v1
+     *  3. INTEGER x2
+     *  4. INTEGER v2
+     */
 
-    
+    public static string Kangaroo(int x1, int v1, int x2, int v2)
+    {
+        return "YES";
+    }
+
+    static int SolveMeFirst(int a, int b)
+    {
+        if (a >= 1 && b >= 1 && a <= 1000 && b <= 1000)
+        {
+            return a + b;
+        }
+        return 0;   
+    }
+
+    public static List<int> CompareTriplets(List<int> a, List<int> b)
+    {
+        int alice = 0, bob = 0;
+
+        for (int i = 0; i < a.Count(); i++)
+        {
+            if (a[i] > b[i])
+            {
+                alice++;
+            }
+
+            if (a[i] < b[i])
+            {
+                bob++;
+            }
+
+            // moot point
+            if (a[i] == b[i])
+            {
+                continue;
+            }
+        }
+        Console.WriteLine("Alice: " + alice + " Bob: " + bob);
+        return [alice, bob];
+    }
 
     public static int Main(string[] args)
     {
@@ -941,6 +989,12 @@ class Result
         int number = 7819;
 
         Result.BitsEqualToOne(number);
+
+        Result.Kangaroo(0,3,4,2);
+
+        Console.WriteLine("Solve Me First called last: " + Result.SolveMeFirst(1, 3));
+
+        Console.WriteLine("Comparing Triplets: " + CompareTriplets([17, 28, 30], [99, 16, 8]));
 
         return 0;
     }
