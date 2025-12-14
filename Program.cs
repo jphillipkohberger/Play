@@ -411,6 +411,26 @@ class Result
         return (long)ar.Sum();
     }
 
+    public static int DiagonalDifferenceCheck(List<List<int>> arr)
+    {
+        int absSumLeftToRight = 0, absSumRightToLeft = 0, leftToRight = 0, rightToLeft = arr.Count() - 1,
+            thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0;
+
+        int i = 0;
+        while(i < arr.Count())
+        {
+            int j = 0;
+            while (j < arr[i].Count()) 
+            {
+                Console.WriteLine("Value: "+ arr[i][j]);
+                j++;
+            }
+            i++;
+        }
+
+        return Result.DiagonalDifference(arr);
+    }
+
     public static int DiagonalDifference(List<List<int>> arr)
     {
         int absSumLeftToRight = 0, absSumRightToLeft = 0, leftToRight = 0, rightToLeft = arr.Count() - 1, 
@@ -969,12 +989,18 @@ class Result
         Result.PlusMinus(numberList);
 
         List<List<int>> arr = [
-            [11, 2,  4], 
-            [4,  5,  6], 
+            [11, 2,  4],
+            [4,  5,  6],
             [10, 8, -12]
         ];
 
         int diagonalDifferenceAbsoluteSum = Result.DiagonalDifference(arr);
+
+        Console.WriteLine("Diagonal Difference Absolute Sum: " + diagonalDifferenceAbsoluteSum);
+
+        int diagonalDifferenceAbsoluteSumCheck = Result.DiagonalDifferenceCheck(arr);
+
+        Console.WriteLine("Diagonal Difference Absolute Sum Check: " + diagonalDifferenceAbsoluteSumCheck);
 
         Result.Staircase(6);
 
