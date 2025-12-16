@@ -433,6 +433,7 @@ class Result
             {
                 if (thisColumn == 0)
                 {
+                    Console.WriteLine("");
                     Console.WriteLine("Value Check Last Column I: " + arr[i][thisColumn]);
                     thisColumn++;   
                 } 
