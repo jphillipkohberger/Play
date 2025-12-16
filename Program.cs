@@ -426,23 +426,42 @@ class Result
             thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0;
 
         int i = 0;
-        while(i < arr.Count())
+
+        /**
+         * List<List<int>> arr = [
+                [11, 2, 7,  4],
+                [4,  5, 5,  6],
+                [10, 8, 11,-12],
+                [18, 5, 14,-28]
+            ];
+            we want 11 5 11 -28
+        */
+        while (i < arr.Count())
         {       
             thisColumn = 0;
+            /**
+             * bring in i or this row to exact a spot in the matrix grid
+             */
             while (thisColumn < arr[i].Count()) 
             {
                 if (thisColumn == 0)
                 {
                     Console.WriteLine("");
                     Console.WriteLine("Value Check Last Column I: " + arr[i][thisColumn]);
-                    thisColumn++;   
+                    lastColumn = thisColumn;
+                    thisColumn++;
+                    continue;
                 } 
                 else
                 {
                     if (thisColumn <= arr[i].Count() - 1)
                     {
+
                         Console.WriteLine("Value Check Last Column O: " + arr[i][thisColumn]);
+                        lastColumn++;
+                        Console.WriteLine("Last Column: " + lastColumn);
                         thisColumn++;
+                        continue;
                     }
                 }
             }
