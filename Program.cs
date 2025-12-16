@@ -427,16 +427,24 @@ class Result
 
         int i = 0;
         while(i < arr.Count())
-        {
+        {       
             int j = 0;
             while (j < arr[i].Count()) 
             {
-                Console.WriteLine("Value Check: " + arr[i][j]);
-                if (i == 0 && j == 0)
+                if (j == 0)
                 {
-                    //absSum += (arr[i][j]);
                     lastColumn = j;
-                    //break;
+                    Console.WriteLine("Value Check Last Column I: " + arr[i][lastColumn]);
+                    lastColumn++; 
+                } 
+                else
+                {
+                    if (j <= arr[i].Count() - 1)
+                    {
+                        lastColumn = j;
+                        Console.WriteLine("Value Check Last Column O: " + arr[i][lastColumn]);
+                        lastColumn++;
+                    }
                 }
                 j++;
             }
