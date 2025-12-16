@@ -428,14 +428,13 @@ class Result
         int i = 0;
         while(i < arr.Count())
         {       
-            int j = 0;
             thisColumn = 0;
             while (thisColumn < arr[i].Count()) 
             {
                 if (thisColumn == 0)
                 {
                     Console.WriteLine("Value Check Last Column I: " + arr[i][thisColumn]);
-                    thisColumn++; 
+                    thisColumn++;   
                 } 
                 else
                 {
@@ -445,7 +444,6 @@ class Result
                         thisColumn++;
                     }
                 }
-                j++;
             }
             i++;
         }
