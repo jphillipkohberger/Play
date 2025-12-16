@@ -429,21 +429,20 @@ class Result
         while(i < arr.Count())
         {       
             int j = 0;
-            while (j < arr[i].Count()) 
+            thisColumn = 0;
+            while (thisColumn < arr[i].Count()) 
             {
-                if (j == 0)
+                if (thisColumn == 0)
                 {
-                    lastColumn = j;
-                    Console.WriteLine("Value Check Last Column I: " + arr[i][lastColumn]);
-                    lastColumn++; 
+                    Console.WriteLine("Value Check Last Column I: " + arr[i][thisColumn]);
+                    thisColumn++; 
                 } 
                 else
                 {
-                    if (j <= arr[i].Count() - 1)
+                    if (thisColumn <= arr[i].Count() - 1)
                     {
-                        lastColumn = j;
-                        Console.WriteLine("Value Check Last Column O: " + arr[i][lastColumn]);
-                        lastColumn++;
+                        Console.WriteLine("Value Check Last Column O: " + arr[i][thisColumn]);
+                        thisColumn++;
                     }
                 }
                 j++;
