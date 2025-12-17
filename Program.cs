@@ -438,7 +438,6 @@ class Result
                 [4,  5, 5,  6],
                 [10, 8, 11,-12],
                 [18, 5, 14,-28]
-
             ];
             we want 11 5 11 -28
         */
@@ -451,7 +450,20 @@ class Result
                 if(thisRow == thisColumn)
                 {
                     absSumLeftToRight += arr[thisRow][thisColumn];
-                    //Console.WriteLine("Diagonal Sum: " + arr[thisRow][thisColumn]);
+                }
+                thisColumn++;
+            }
+            thisRow++;
+        }
+
+        while (thisRow < arr.Count())
+        {
+            thisColumn = 0;
+            while (thisColumn < arr[thisRow].Count())
+            {
+                if (thisRow == thisColumn)
+                {
+                    absSumLeftToRight += arr[thisRow][thisColumn];
                 }
                 thisColumn++;
             }
