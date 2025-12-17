@@ -422,8 +422,13 @@ class Result
 
     public static int DiagonalDifferenceCheck(List<List<int>> arr)
     {
+        //if (arr.Count() >= 1 ) { return 0; }
+        if (arr.Count() != arr[0].Count()) { return 0; }
+
         int absSumLeftToRight = 0, absSumRightToLeft = 0, absSum = 0,  leftToRight = 0, rightToLeft = arr.Count() - 1,
             thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0;
+
+        string message = "";
 
         int i = 0;
 
@@ -433,44 +438,37 @@ class Result
                 [4,  5, 5,  6],
                 [10, 8, 11,-12],
                 [18, 5, 14,-28]
+
             ];
             we want 11 5 11 -28
         */
+
+        /**                     
+         *  Start fresh screen
+         */
+        Console.WriteLine("");
+
         while (i < arr.Count())
         {       
             thisColumn = 0;
-            /**
-             * bring in i or this row to exact a spot in the matrix grid
-             */
             while (thisColumn < arr[i].Count()) 
             {
-                if (thisColumn == 0)
+                if(i == thisColumn)
                 {
-                    Console.WriteLine("                      Row: " + i);
-                    Console.WriteLine("   Index for diagonal ele: " + i);
-                    Console.WriteLine("Value Check Last Column O: " + arr[i][thisColumn]);
-                    lastColumn = thisColumn;
-                    thisColumn++;
-                    continue;
-                } 
+                    message = " Diagonal: ";
+                    Console.WriteLine("Diagonal value: " + arr[i][thisColumn]);
+                }
                 else
                 {
-                    if (thisColumn <= arr[i].Count() - 1)
-                    {
-
-                        Console.WriteLine("Value Check Last Column I: " + arr[i][thisColumn]);
-                        lastColumn++;
-                        thisColumn++;
-                        continue;
-                    } 
-                    else
-                    {
-                        
-                    }
+                    message = "";
                 }
+
+                thisColumn++;
             }
             i++;
         }
+
+        Console.WriteLine("");
 
         return Result.DiagonalDifference(arr);
     }
