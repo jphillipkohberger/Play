@@ -446,8 +446,8 @@ class Result
             {
                 if (thisColumn == 0)
                 {
-                    Console.WriteLine("Row: " + i);
-                    Console.WriteLine("Value Check Last Column I: " + arr[i][thisColumn]);
+                    Console.WriteLine("                      Row: " + i);
+                    Console.WriteLine("Value Check Last Column O: " + arr[i][thisColumn]);
                     lastColumn = thisColumn;
                     thisColumn++;
                     continue;
@@ -457,7 +457,7 @@ class Result
                     if (thisColumn <= arr[i].Count() - 1)
                     {
 
-                        Console.WriteLine("Value Check Last Column O: " + arr[i][thisColumn]);
+                        Console.WriteLine("Value Check Last Column I: " + arr[i][thisColumn]);
                         lastColumn++;
                         thisColumn++;
                         continue;
