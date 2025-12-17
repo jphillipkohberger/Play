@@ -447,6 +447,7 @@ class Result
                 if (thisColumn == 0)
                 {
                     Console.WriteLine("                      Row: " + i);
+                    Console.WriteLine("   Index for diagonal ele: " + i);
                     Console.WriteLine("Value Check Last Column O: " + arr[i][thisColumn]);
                     lastColumn = thisColumn;
                     thisColumn++;
