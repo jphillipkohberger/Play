@@ -426,7 +426,7 @@ class Result
         if (arr.Count() != arr[0].Count()) { return 0; }
 
         int absSumLeftToRight = 0, absSumRightToLeft = 0, absSum = 0,  leftToRight = 0, rightToLeft = arr.Count() - 1,
-            thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0;
+            thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0, incrementer = 0, thisAbsValue = 0;
 
         string message = "";
 
@@ -456,21 +456,32 @@ class Result
             thisRow++;
         }
 
-        while (thisRow < arr.Count())
+        /**
+         * List<List<int>> arr = [
+                [11, 2, 7,  4],
+                [4,  5, 5,  6],
+                [10, 8, 11,-12],
+                [18, 5, 14,-28]
+            ];
+            we want 4 5 8 18
+        */
+
+        thisRow = arr.Count() - 1;
+        while (thisRow >= 0)
         {
             thisColumn = 0;
             while (thisColumn < arr[thisRow].Count())
             {
                 if (thisRow == thisColumn)
                 {
-                    absSumLeftToRight += arr[thisRow][thisColumn];
+                    absSumRightToLeft += arr[thisRow][thisColumn];
                 }
                 thisColumn++;
             }
-            thisRow++;
+            thisRow--;
         }
 
-        return Result.DiagonalDifference(arr);
+        return Math.Abs(absSumLeftToRight - absSumRightToLeft);
     }
 
     public static int DiagonalDifference(List<List<int>> arr)
