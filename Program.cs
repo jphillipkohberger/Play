@@ -426,7 +426,7 @@ class Result
         if (arr.Count() != arr[0].Count()) { return 0; }
 
         int absSumLeftToRight = 0, absSumRightToLeft = 0, absSum = 0,  leftToRight = 0, rightToLeft = arr.Count() - 1,
-            thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0, incrementer = 0, thisAbsValue = 0;
+            thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0, incrementer = 0, thisAbsValue = 0, nextColumn = 0, nextRow = 0;
 
         string message = "";
 
@@ -472,10 +472,25 @@ class Result
             thisColumn = 0;
             while (thisColumn < arr[thisRow].Count())
             {
-                if (thisRow == thisColumn)
+                //if (thisRow == thisColumn)
+                //{
+                //    absSumRightToLeft += arr[thisRow][thisColumn];
+                //}
+                if(thisRow ==  arr[thisRow].Count() - 1 && thisColumn == 0)
                 {
                     absSumRightToLeft += arr[thisRow][thisColumn];
+                    nextRow = thisRow - 1;
+                    nextColumn = thisColumn + 1;
+                    break;
                 }
+                if(thisRow == nextRow && thisColumn == nextColumn)
+                {
+                    absSumRightToLeft += arr[thisRow][thisColumn];
+                    nextRow = thisRow - 1;
+                    nextColumn = thisColumn + 1;
+                    break;
+                }
+                Console.WriteLine("Diagonal Check: " + arr[thisRow][thisColumn]);
                 thisColumn++;
             }
             thisRow--;
