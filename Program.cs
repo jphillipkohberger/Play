@@ -565,6 +565,30 @@ class Result
         return a.Max();
     }
 
+    public static void StaircaseCheck(int n)
+    {
+        int absSumLeftToRight = 0, absSumRightToLeft = 0, leftToRight = 0, rightToLeft = n - 1,
+            thisRow = 0, lastRow = 0, thisColumn = 0, lastColumn = 0, i = 0, j = 0, k = 0, l = 0, tracker = 0;
+
+        tracker = n;
+        List<List<string>> arr = new();
+        while (i < n) 
+        {
+            List<string> strList = Enumerable.Repeat("#", tracker).ToList();
+
+            int difference = n - strList.Count();
+            k = 0;
+            for (k = 0; k < difference; k++)
+            {
+                strList.Insert(0, " "); 
+            }
+
+            arr.Add(strList);
+            i++;
+            tracker--;
+        }
+    }
+
     public static void Staircase(int n)
     {
         int absSumLeftToRight = 0, absSumRightToLeft = 0, leftToRight = 0, rightToLeft = n - 1,
@@ -1045,6 +1069,7 @@ class Result
         Console.WriteLine("Diagonal Difference Absolute Sum Check: " + diagonalDifferenceAbsoluteSumCheck);
 
         Result.Staircase(6);
+        Result.StaircaseCheck(15);
 
         Result.MiniMaxSum([1, 2, 3, 4, 5]);
 
