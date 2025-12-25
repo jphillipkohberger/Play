@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 
@@ -589,7 +590,7 @@ class Result
 
         i = n - 1;
         j = 0;
-        while (i > 0) {
+        while (i >= 0) {
             buffer = "";
             j = 0;
             while (j < arr[i].Count()) 
@@ -974,6 +975,22 @@ class Result
         return [alice, bob];
     }
 
+    /**
+     *
+     * The function accepts following parameters:
+     *  1. INTEGER s
+     *  2. INTEGER t
+     *  3. INTEGER a
+     *  4. INTEGER b
+     *  5. INTEGER_ARRAY apples
+     *  6. INTEGER_ARRAY oranges
+     **/
+
+    public static void CountApplesAndOranges(int s, int t, int a, int b, List<int> apples, List<int> oranges)
+    {
+        Console.WriteLine("Apples count: " + apples.Count());
+    }
+
     public static int Main(string[] args)
     {
         /**
@@ -1082,7 +1099,7 @@ class Result
         Console.WriteLine("Diagonal Difference Absolute Sum Check: " + diagonalDifferenceAbsoluteSumCheck);
 
         Result.Staircase(6);
-        Result.StaircaseCheck(100);
+        Result.StaircaseCheck(6);
 
         Result.MiniMaxSum([1, 2, 3, 4, 5]);
 
@@ -1101,6 +1118,18 @@ class Result
         Console.WriteLine("Solve Me First called last: " + Result.SolveMeFirst(1, 3));
 
         Console.WriteLine("Comparing Triplets: " + CompareTriplets([17, 28, 30], [99, 16, 8]));
+
+        /**
+         * 
+         * Variables for CountApplesAndOranges function
+         * 
+         **/
+
+        int s = 0, t = 0, aa = 0, b = 0;
+        List<int> apples = Enumerable.Repeat(0, 10).ToList();
+        List<int> oranges = Enumerable.Repeat(0, 10).ToList();
+
+        Result.CountApplesAndOranges(s,t, aa, b, apples, oranges);
 
         return 0;
     }
