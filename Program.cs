@@ -989,6 +989,21 @@ class Result
     public static void CountApplesAndOranges(int s, int t, int a, int b, List<int> apples, List<int> oranges)
     {
         Console.WriteLine("Apples count: " + apples.Count());
+
+        if(apples.Count() != oranges.Count()) { return; }
+
+        int i = 0;
+        List<int> applesSum = new List<int>();
+        List<int> orangesSum = new List<int>();
+
+        while (i < apples.Count() && i < oranges.Count())
+        {
+            if ((a + apples[i]) >= s && (a + apples[i]) <= t) applesSum.Add(a + apples[i]);
+            if ((b + oranges[i]) >= s && (b + oranges[i]) <= t) orangesSum.Add(b + oranges[i]);
+            i++;
+        }
+        Console.WriteLine(applesSum.Count());
+        Console.WriteLine(orangesSum.Count());
     }
 
     public static int Main(string[] args)
@@ -1125,9 +1140,9 @@ class Result
          * 
          **/
 
-        int s = 0, t = 0, aa = 0, b = 0;
-        List<int> apples = Enumerable.Repeat(0, 10).ToList();
-        List<int> oranges = Enumerable.Repeat(0, 10).ToList();
+        int s = 7, t = 10, aa = 4, b = 12;
+        List<int> apples = new List<int> { 2, 3, -4 };
+        List<int> oranges = new List<int> { 3, -2, -4 };
 
         Result.CountApplesAndOranges(s,t, aa, b, apples, oranges);
 
