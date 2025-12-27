@@ -924,22 +924,6 @@ class Result
         return 0;
     }
 
-    /*
-     * Complete the 'kangaroo' function below.
-     *
-     * The function is expected to return a STRING.
-     * The function accepts following parameters:
-     *  1. INTEGER x1
-     *  2. INTEGER v1
-     *  3. INTEGER x2
-     *  4. INTEGER v2
-     */
-
-    public static string Kangaroo(int x1, int v1, int x2, int v2)
-    {
-        return "YES";
-    }
-
     static int SolveMeFirst(int a, int b)
     {
         if (a >= 1 && b >= 1 && a <= 1000 && b <= 1000)
@@ -1007,6 +991,22 @@ class Result
         }
         Console.WriteLine(applesSum.Count());
         Console.WriteLine(orangesSum.Count());
+    }
+
+    /*
+     * Complete the 'kangaroo' function below.
+     *
+     * The function is expected to return a STRING.
+     * The function accepts following parameters:
+     *  1. INTEGER x1
+     *  2. INTEGER v1
+     *  3. INTEGER x2
+     *  4. INTEGER v2
+     */
+
+    public static string Kangaroo(int x1, int v1, int x2, int v2)
+    {
+        return "YES";
     }
 
     public static int Main(string[] args)
