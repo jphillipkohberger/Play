@@ -988,17 +988,20 @@ class Result
 
     public static void CountApplesAndOranges(int s, int t, int a, int b, List<int> apples, List<int> oranges)
     {
-        Console.WriteLine("Apples count: " + apples.Count());
+        int i;
 
-        if(apples.Count() != oranges.Count()) { return; }
-
-        int i = 0;
+        i = 0;
         List<int> applesSum = new List<int>();
-        List<int> orangesSum = new List<int>();
-
-        while (i < apples.Count() && i < oranges.Count())
+        while (i < apples.Count())
         {
             if ((a + apples[i]) >= s && (a + apples[i]) <= t) applesSum.Add(a + apples[i]);
+            i++;
+        }
+
+        i = 0;
+        List<int> orangesSum = new List<int>();
+        while (i < oranges.Count())
+        {
             if ((b + oranges[i]) >= s && (b + oranges[i]) <= t) orangesSum.Add(b + oranges[i]);
             i++;
         }
