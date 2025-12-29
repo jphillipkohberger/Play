@@ -1006,7 +1006,46 @@ class Result
 
     public static string Kangaroo(int x1, int v1, int x2, int v2)
     {
-        return "YES";
+        int positionOneKangaroo = x1;
+        int positionTwoKangaroo = x2;
+
+        while (positionOneKangaroo != positionTwoKangaroo)
+        {
+            
+            positionOneKangaroo += v1;
+            positionTwoKangaroo += v2;
+
+            if (positionOneKangaroo < 0 || positionTwoKangaroo < 0)
+            {
+                return "NO";
+            }
+
+            if (positionOneKangaroo >= int.MaxValue || positionTwoKangaroo >= int.MaxValue)
+            {
+                return "NO";
+            }
+
+            if (positionOneKangaroo == positionTwoKangaroo)
+            {
+                return "YES";
+            }
+
+            long memoryLimitBytes = 35 * 1024 * 1024; // 500 MB
+            long currentMemory = System.Diagnostics.Process.GetCurrentProcess().WorkingSet64;
+
+            if (currentMemory > memoryLimitBytes)
+            {
+                return "NO";
+            }
+
+            long peakMemory = System.Diagnostics.Process.GetCurrentProcess().PeakWorkingSet64;
+            if (peakMemory > memoryLimitBytes)
+            {
+                return "NO";
+            }
+
+        }
+        return "NO";
     }
 
     public static int Main(string[] args)
@@ -1131,8 +1170,6 @@ class Result
 
         Result.BitsEqualToOne(number);
 
-        Result.Kangaroo(0,3,4,2);
-
         Console.WriteLine("Solve Me First called last: " + Result.SolveMeFirst(1, 3));
 
         Console.WriteLine("Comparing Triplets: " + CompareTriplets([17, 28, 30], [99, 16, 8]));
@@ -1148,6 +1185,10 @@ class Result
         List<int> oranges = new List<int> { 3, -2, -4 };
 
         Result.CountApplesAndOranges(s,t, aa, b, apples, oranges);
+
+        string answer0 = Result.Kangaroo(0, 3, 4, 2);
+
+        string answer1 = Result.Kangaroo(0, 2, 5, 3);
 
         return 0;
     }
