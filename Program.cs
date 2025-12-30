@@ -1015,11 +1015,6 @@ class Result
             positionOneKangaroo += v1;
             positionTwoKangaroo += v2;
 
-            if (positionOneKangaroo < 0 || positionTwoKangaroo < 0)
-            {
-                return "NO";
-            }
-
             if (positionOneKangaroo >= int.MaxValue || positionTwoKangaroo >= int.MaxValue)
             {
                 return "NO";
@@ -1030,7 +1025,11 @@ class Result
                 return "YES";
             }
 
-            long memoryLimitBytes = 35 * 1024 * 1024; // 500 MB
+            /**
+             *  35 MBs - set low benchmark
+             */
+
+            long memoryLimitBytes = 35 * 1024 * 1024;
             long currentMemory = System.Diagnostics.Process.GetCurrentProcess().WorkingSet64;
 
             if (currentMemory > memoryLimitBytes)
