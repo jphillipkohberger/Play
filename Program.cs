@@ -1055,6 +1055,11 @@ class Result
         return "NO";
     }
 
+    public static int GetTotalX(List<int> a, List<int> b)
+    {
+        return 0;
+    }
+
     public static int Main(string[] args)
     {
         /**
@@ -1196,6 +1201,9 @@ class Result
         string answer0 = Result.Kangaroo(0, 3, 4, 2);
 
         string answer1 = Result.Kangaroo(0, 2, 5, 3);
+
+        string answer3 = Result.GetTotalX(
+            new List<int>{0, 1, 2, 3 }, new List<int> {0, 1, 2, 3 }).ToString();
 
         return 0;
     }   
