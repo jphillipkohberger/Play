@@ -1006,6 +1006,14 @@ class Result
 
     public static string Kangaroo(int x1, int v1, int x2, int v2)
     {
+        if (x1 < x2 && x2 <= 10000) { return "NO"; }
+
+        foreach (int i in (new List<int> { x1, v1, x2, v2 }))
+        {
+            if(i > 10000) { return "NO"; }
+        }
+
+
         int positionOneKangaroo = x1;
         int positionTwoKangaroo = x2;
 
@@ -1190,7 +1198,7 @@ class Result
         string answer1 = Result.Kangaroo(0, 2, 5, 3);
 
         return 0;
-    }
+    }   
 
 }
 
