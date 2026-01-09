@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Numerics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
@@ -1055,8 +1058,97 @@ class Result
         return "NO";
     }
 
+//    Here’s a clear, step-by-step explanation of what that statement means and **why the answer is 4, 8, and 16**.
+
+//---
+
+//### Step 1: Understand the condition
+
+//We are looking for numbers that satisfy** two rules**:
+
+//1. **Each element of set A divides the number evenly**
+//   → The number must be a** multiple of every number in A**.
+
+//2. **The number divides each element of set B evenly**
+//   → The number must be a** factor of every number in B**.
+
+//---
+
+//### Step 2: Apply the first rule (multiples of A)
+
+//From the text, set** A = { 2, 4 }**.
+
+//Numbers that are divisible by** both 2 and 4** are:
+
+//* 4, 8, 12, 16, 20, …
+
+//So possible candidates are:
+
+//> **4, 8, 12, 16, …**
+
+//---
+
+//### Step 3: Apply the second rule (factors of B)
+
+//From the text, set** B = { 16, 32, 96 }**.
+
+//Numbers that divide** all** of these evenly are:
+
+//* 1, 2, 4, 8, 16
+
+//---
+
+//### Step 4: Find the overlap
+
+//Now we take the numbers that appear in **both lists**:
+
+//* Multiples of {2,4}: **4, 8, 12, 16**
+//* Factors of {16,32,96}: **1, 2, 4, 8, 16**
+
+//**Common values:**
+
+//> **4, 8, 16**
+
+//---
+
+//### Step 5: Final conclusion
+
+//✔ **4, 8, and 16** are the **only** numbers that:
+
+//* are divisible by** every element of A**, and
+//* divide **every element of B** evenly.
+
+//That’s why the statement concludes:
+
+//> **4, 8, and 16 are the only three numbers** for which each element of A is a factor and each is a factor of all elements of B.
+
+//---
+
+//If you’d like, I can also explain this using **LCM and GCD** (the formal math method).
+
+
     public static int GetTotalX(List<int> a, List<int> b)
     {
+        int i, j, multiplier = 0, GCD = 0;
+
+        List<int> multiples = new List<int>();
+
+        int limit = b.Max();
+
+        for (i = 0; i < a.Count(); i++)
+        {
+            Console.WriteLine("" + a[i]);
+        }
+
+        //for(i = 0; i < a.Count(); i++)
+        //{
+        //    for (j = 1; j * multiplier <= limit; j++)
+        //    {
+        //        GCD = j * multiplier;
+        //        multiples.Add(GCD);
+        //    }
+        //}
+
         return 0;
     }
 
@@ -1065,7 +1157,7 @@ class Result
         /**
          * 
          * 
-         * HOUR GLASS SUM
+         * PROGRAM ENTRYPOINT
          * 
          * 
          */
@@ -1203,7 +1295,7 @@ class Result
         string answer1 = Result.Kangaroo(0, 2, 5, 3);
 
         string answer3 = Result.GetTotalX(
-            new List<int>{0, 1, 2, 3 }, new List<int> {0, 1, 2, 3 }).ToString();
+            new List<int>{ 2, 4 }, new List<int> { 16, 32, 96 }).ToString();
 
         return 0;
     }   
