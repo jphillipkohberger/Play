@@ -1152,6 +1152,11 @@ class Result
         return 0;
     }
 
+    public static int InsertNodeAtTail()
+    {
+        return 0;
+    }
+
     public static int Main(string[] args)
     {
         /**
@@ -1219,7 +1224,7 @@ class Result
 
         Console.WriteLine("Max Bottom: " + max);
 
-        SinglyLinkedList llist = new SinglyLinkedList();
+        SinglyLinkedList llist = new Result.SinglyLinkedList();
         llist.InsertNode(101);
         llist.InsertNode(302);
         llist.InsertNode(164);
@@ -1296,6 +1301,8 @@ class Result
 
         string answer3 = Result.GetTotalX(
             new List<int>{ 2, 4 }, new List<int> { 16, 32, 96 }).ToString();
+
+        Result.InsertNodeAtTail();
 
         return 0;
     }   
